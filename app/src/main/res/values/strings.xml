@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">pokeMap</string>
+    <string name="title_activity_poke_map">PokeMap</string>
+
+    <string name="google_maps_key">AIzaSyB1dlp14ZFIz_jJJzvXWM9KtdS6inm5vKs</string>
+
+</resources>
