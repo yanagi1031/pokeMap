@@ -30,14 +30,21 @@
             android:value="AIzaSyB1dlp14ZFIz_jJJzvXWM9KtdS6inm5vKs" />
 
         <activity
-            android:name=".PokeMapActivity"
-            android:label="@string/title_activity_poke_map">
+            android:name=".PM0000SplashActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".PM0100MainActivity"
+            android:label="@string/title_activity_poke_map">
+        </activity>
+
     </application>
 
 </manifest>

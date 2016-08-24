@@ -1,1 +1,2 @@
-include ':app'
+include ':app', ':uselib'
+project(':uselib').projectDir = new File(settingsDir, '../../smartphone-library/100_プログラム/Android/USELibPrj/uselib')
