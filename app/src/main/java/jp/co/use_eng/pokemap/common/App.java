@@ -37,11 +37,11 @@ public class App extends jp.co.useeng.uselib.base.App {
     public static void init(Context context) {
 
         // ポケモンリストの取得
-//        try {
-//            getInstance().pokemonDataList = (PokemonDataList) SerializeDataManager.getDataFromFile(context, Consts.FILENAME_POKEMON);
-//        } catch (IOException e) {
-//            e.getStackTrace();
-//        }
+        try {
+            getInstance().pokemonDataList = (PokemonDataList) SerializeDataManager.getDataFromFile(context, Consts.FILENAME_POKEMON);
+        } catch (IOException e) {
+            e.getStackTrace();
+        }
 
         // 保存されていなければ初期化
         if (getInstance().pokemonDataList == null) {
