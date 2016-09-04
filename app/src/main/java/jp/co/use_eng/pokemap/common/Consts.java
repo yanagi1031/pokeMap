@@ -7,5 +7,6 @@ public class Consts {
 
     // 保存データファイル名
     public static final String FILENAME_POKEMON	= "PokemonData.dat";
+    public static final String FILENAME_LOCATION = "LocationData.dat";
 
 }
