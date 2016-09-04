@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.String; import java.util.Date;
 
+import jp.co.use_eng.pokemap.Data.LocationDataList;
 import jp.co.use_eng.pokemap.Data.PokemonData;
 import jp.co.use_eng.pokemap.Data.PokemonDataList;
 import jp.co.useeng.uselib.data.SerializeDataManager;
@@ -25,6 +26,7 @@ import jp.co.useeng.uselib.util.UtilFile;
 public class App extends jp.co.useeng.uselib.base.App {
 
     public PokemonDataList pokemonDataList = null;
+    public LocationDataList locationDataList = null;
 
     private static App instance;
     public App() {
@@ -36,12 +38,14 @@ public class App extends jp.co.useeng.uselib.base.App {
 
     public static void init(Context context) {
 
+        //------------------------
         // ポケモンリストの取得
-//        try {
-//            getInstance().pokemonDataList = (PokemonDataList) SerializeDataManager.getDataFromFile(context, Consts.FILENAME_POKEMON);
-//        } catch (IOException e) {
-//            e.getStackTrace();
-//        }
+        //------------------------
+        try {
+            getInstance().pokemonDataList = (PokemonDataList) SerializeDataManager.getDataFromFile(context, Consts.FILENAME_POKEMON);
+        } catch (IOException e) {
+            e.getStackTrace();
+        }
 
         // 保存されていなければ初期化
         if (getInstance().pokemonDataList == null) {
@@ -49,18 +53,25 @@ public class App extends jp.co.useeng.uselib.base.App {
             _createPokemon();
         }
 
+        //------------------------
+        // 位置情報の取得
+        //------------------------
+        try {
+            getInstance().locationDataList = (LocationDataList) SerializeDataManager.getDataFromFile(context, Consts.FILENAME_LOCATION);
+        } catch (IOException e) {
+            e.getStackTrace();
+        }
+
+        // 保存されていなければ初期化
+        if (getInstance().locationDataList == null) {
+            getInstance().locationDataList = new LocationDataList();
+        }
 
 
 
 
 
     }
-
-
-
-
-
-
 
 
 
