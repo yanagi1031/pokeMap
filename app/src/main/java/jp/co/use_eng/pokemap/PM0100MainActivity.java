@@ -8,9 +8,11 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.util.Log;
 import android.Manifest;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -87,17 +89,19 @@ public class PM0100MainActivity extends FragmentActivity implements OnMapReadyCa
         // カメラの移動
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom( new LatLng(35.68, 139.76), 12));
 
+
+
         // ピンがタップされた時に表示するバルーンのカスタマイズ
         mMap.setInfoWindowAdapter(new InfoWindowAdapter() {
 
             @Override
             public View getInfoContents(Marker marker) {
-
                 View view = getLayoutInflater().inflate(R.layout.info_window, null);
+                view.setLayoutParams(new LinearLayout.LayoutParams(500, 200));
 
                 // タイトル設定
                 TextView pokeName = (TextView)view.findViewById(R.id.txtPokemonName);
-                pokeName.setText("aaaaaaaa" + marker.getId());
+                pokeName.setText(marker.getId());
 
                 // いいね件数
                 TextView goodCnt = (TextView)view.findViewById(R.id.txtGoodCnt);
