@@ -1,6 +1,7 @@
 package jp.co.use_eng.pokemap;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -97,7 +98,9 @@ public class PM0100MainActivity extends FragmentActivity implements OnMapReadyCa
             @Override
             public View getInfoContents(Marker marker) {
                 View view = getLayoutInflater().inflate(R.layout.info_window, null);
-                view.setLayoutParams(new LinearLayout.LayoutParams(500, 200));
+                view.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT));
 
                 // タイトル設定
                 TextView pokeName = (TextView)view.findViewById(R.id.txtPokemonName);
@@ -137,6 +140,18 @@ public class PM0100MainActivity extends FragmentActivity implements OnMapReadyCa
         options.position(new LatLng(cameraPos.target.latitude, cameraPos.target.longitude));
         options.title("Hello world");
         Marker marker = mMap.addMarker(options);
+    }
+
+    // 登録画面に遷移
+    public void onClickRegist(View view) {
+
+        // インテントの生成
+        Intent intent = new Intent();
+        intent.setClassName("jp.co.use_eng.pokemap", "jp.co.use_eng.pokemap.PM0200RegistActivity");
+
+        // SubActivity の起動
+        startActivity(intent);
+
     }
 
 }
