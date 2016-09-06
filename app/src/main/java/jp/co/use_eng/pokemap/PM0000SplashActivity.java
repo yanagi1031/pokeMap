@@ -15,6 +15,11 @@ public class PM0000SplashActivity extends BaseSplashActivity {
     }
 
     @Override
+    public int getLayoutId() throws Exception {
+        return R.layout.slpash;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 初期処理

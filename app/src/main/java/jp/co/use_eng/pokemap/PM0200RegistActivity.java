@@ -7,32 +7,21 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import jp.co.useeng.uselib.base.BaseActivity;
-import butterknife.InjectView;
-import butterknife.OnClick;
 import jp.co.useeng.uselib.util.UtilView;
 import jp.co.useeng.uselib.util.UtilWindow;
 
-public class PM0200RegistActivity extends AppCompatActivity {
+public class PM0200RegistActivity extends BaseActivity {
 
-    // ヘッダー
-    @InjectView(R.id.llHead)
-    RelativeLayout llHead;
-    @InjectView(R.id.llHeadBack)
-    LinearLayout llHeadBack;
-
-
+    @Override
+    public int getLayoutId() throws Exception {
+        return R.layout.activity_pm0200_regist;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pm0200_regist);
 
-        llHead.post(new Runnable() {
-            @Override
-            public void run() {
-                UtilView.setViewSize(llHeadBack, llHead.getWidth(), llHead.getHeight());
-            }
-        });
+
 
     }
 }
