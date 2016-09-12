@@ -13,4 +13,7 @@
     <string name="btnPin">ピンを刺す</string>
     <string name="btnFilter">フィルター</string>
     <string name="btnRegist">投稿する</string>
+    <string name="btnToukou">投稿</string>
+    <string name="btnBack">キャンセル</string>
+    <string name="lblRegist">投稿情報</string>
 </resources>

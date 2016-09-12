@@ -31,6 +31,8 @@ import com.google.android.gms.maps.model.Marker;
 import jp.co.use_eng.pokemap.Data.PokemonDataList;
 import jp.co.use_eng.pokemap.R;
 import jp.co.use_eng.pokemap.common.App;
+import jp.co.use_eng.pokemap.common.Consts;
+import jp.co.useeng.uselib.component.AdMobBannerView;
 
 public class PM0100MainActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -40,6 +42,11 @@ public class PM0100MainActivity extends FragmentActivity implements OnMapReadyCa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pm0100_main);
+
+        // 広告表示
+        AdMobBannerView adMobBannerView = (AdMobBannerView)findViewById(R.id.adView);
+        adMobBannerView.startAd(Consts.AD_ID_BANNER);
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -67,15 +74,15 @@ public class PM0100MainActivity extends FragmentActivity implements OnMapReadyCa
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-        Log.d("onClick","きてますね");
-
         //LocationManagerの取得
         LocationManager locationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+        Location myLocate = null;
         //GPSから現在地の情報を取得
         if(locationManager != null) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 // GPS使用可能
-                Location myLocate = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                myLocate = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
             } else {
                 // GPSが使用できない端末？
 
@@ -87,10 +94,13 @@ public class PM0100MainActivity extends FragmentActivity implements OnMapReadyCa
 
         }
 
-        // カメラの移動
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom( new LatLng(35.68, 139.76), 12));
-
-
+        if (myLocate != null) {
+            // カメラの移動
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom( new LatLng(myLocate.getLatitude(), myLocate.getLongitude()), 12));
+        } else {
+            // カメラの移動
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom( new LatLng(35.68, 139.76), 12));
+        }
 
         // ピンがタップされた時に表示するバルーンのカスタマイズ
         mMap.setInfoWindowAdapter(new InfoWindowAdapter() {

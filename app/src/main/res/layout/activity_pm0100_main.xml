@@ -58,4 +58,10 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+    <!-- バナー広告 -->
+    <jp.co.useeng.uselib.component.AdMobBannerView
+        android:id="@+id/adView"
+        style="@style/AdMobBannerViewStyle"
+        android:layout_alignParentBottom="true" />
+
 </RelativeLayout>

@@ -16,7 +16,7 @@ public class PM0000SplashActivity extends BaseSplashActivity {
 
     @Override
     public int getLayoutId() throws Exception {
-        return R.layout.slpash;
+        return R.layout.splash;
     }
 
     @Override
