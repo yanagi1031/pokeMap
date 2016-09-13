@@ -1,6 +1,7 @@
 package jp.co.use_eng.pokemap;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -8,6 +9,7 @@ import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -28,30 +30,127 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.model.Marker;
 
+import java.io.IOException;
+
 import jp.co.use_eng.pokemap.Data.PokemonDataList;
 import jp.co.use_eng.pokemap.R;
 import jp.co.use_eng.pokemap.common.App;
 import jp.co.use_eng.pokemap.common.Consts;
 import jp.co.useeng.uselib.component.AdMobBannerView;
+import jp.co.useeng.uselib.base.BaseActivity;
 
-public class PM0100MainActivity extends FragmentActivity implements OnMapReadyCallback {
+public class PM0100MainActivity extends BaseActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
     @Override
+    public int getLayoutId() throws Exception {
+        return R.layout.activity_pm0100_main;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pm0100_main);
 
         // 広告表示
         AdMobBannerView adMobBannerView = (AdMobBannerView)findViewById(R.id.adView);
         adMobBannerView.startAd(Consts.AD_ID_BANNER);
 
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        // GoogleMapの使用
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+//        // 初期情報を取得する
+//        startSimpleThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    // 初期情報取得
+//                    final HttpsData httpsData = new AmanoHttpsData(T101TopActivity.this.getApplicationContext());
+//                    if(httpsData.getInitData()) {
+//                        if(is_dialog) {
+//
+//                            // クレジット決済チェック
+//                            final boolean result = httpsData.DBGetIsOrderedCredit(AppManager.getOrderData().order_no);
+//
+//                            mHandler.post(new Runnable() {
+//                                @Override
+//                                public void run() {
+//
+//                                    if(getSelectedSaveData() != null) {
+//                                        // 写真選択画面 確認ダイアログ
+//                                        showConfDialog("年賀状作成", O201ImageSelActivity.class);
+//                                        return;
+//                                    } else {
+//                                        CartDataList cartDataList = AppManager.getCartDataList();
+//                                        if(cartDataList != null) {
+//                                            if(!TextUtils.isEmpty(cartDataList.order_no)) {
+//                                                // 注文番号取得済みの場合、注文送信画面 確認ダイアログ
+//                                                showConfDialog("注文画像送信", O702SendActivity.class);
+//                                                return;
+//                                            } else if(cartDataList.size() > 0) {
+//                                                // 注文番号未取得の場合、カート一覧画面 確認ダイアログ
+//                                                showConfDialog("注文枚数入力", O701CartListActivity.class);
+//                                                return;
+//                                            } else {
+//                                                AppManager.clearCartDataList();
+//                                            }
+//                                        }
+//
+//                                        if(AppManager.getOrderData().isData()) {
+//                                            // 注文画像送信済みの場合
+//                                            if(result){
+//                                                // ダイアログ表示
+//                                                showDialog("確認"
+//                                                        , 0
+//                                                        , "前回の注文のクレジットカード決済が完了しています。\n注文完了処理を行います。"
+//                                                        , "OK"
+//                                                        , new DialogInterface.OnClickListener() {
+//                                                            @Override
+//                                                            public void onClick(DialogInterface dialog, int which) {
+//                                                                try {
+//                                                                    // 注文履歴に追加
+//                                                                    getOrderLogDataList().addOrder(AppManager.getOrderData());
+//
+//                                                                    // 注文履歴を保存
+//                                                                    AppManager.saveOrderLogDataList();
+//
+//                                                                    // 注文情報をクリア
+//                                                                    AppManager.clearOrderData();
+//
+//                                                                    // 注文完了画面を呼び出し
+//                                                                    addView(O1005DetailActivity.class, null);
+//                                                                } catch (IOException e) {
+//                                                                }
+//                                                            }
+//                                                        }
+//                                                );
+//                                            } else {
+//                                                // 再開確認メッセージ表示
+//                                                showConfDialog("注文", O801LoginActivity.class);
+//                                            }
+//                                        }
+//                                    }
+//
+//                                }
+//                            });
+//                        }
+//                    } else {
+//                        showErrorDialog(is_dialog);
+//                    }
+//
+//                } catch(Exception e) {
+//                    showErrorDialog(is_dialog);
+//                } finally {
+//                    closeSimpleThread();
+//                    progressEnd();
+//                }
+//            }
+//        });
+
+
+
+
 
 
     }

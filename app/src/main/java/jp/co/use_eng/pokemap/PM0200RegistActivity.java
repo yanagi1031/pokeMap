@@ -24,6 +24,8 @@ public class PM0200RegistActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // 全画面広告準備
+        interstitialLoad(jp.co.use_eng.pokemap.common.Consts.AD_ID_RESULT);
 
 
     }
@@ -36,8 +38,8 @@ public class PM0200RegistActivity extends BaseActivity {
     // 登録画面に戻る
     public void onClickToukou(View view) {
 
-
-
+        // 広告表示
+        interstitialShow(jp.co.use_eng.pokemap.common.Consts.AD_ID_RESULT,null);
 
     }
 
