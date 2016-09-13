@@ -34,7 +34,6 @@
         android:id="@+id/btnRegist"
         android:layout_above="@+id/include"
         android:layout_alignParentEnd="true"
-        android:textColor="@android:color/white"
         android:background="#00000000"
         android:onClick="onClickRegist" />
 
