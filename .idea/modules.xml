@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pokeMap.iml" filepath="$PROJECT_DIR$/pokeMap.iml" />
       <module fileurl="file://$PROJECT_DIR$/pokeMap.iml" filepath="$PROJECT_DIR$/pokeMap.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../smartphone-library/100_プログラム/Android/USELibPrj/uselib/uselib.iml" filepath="$PROJECT_DIR$/../../smartphone-library/100_プログラム/Android/USELibPrj/uselib/uselib.iml" />
     </modules>

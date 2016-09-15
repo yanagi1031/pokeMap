@@ -10,7 +10,6 @@ import java.util.Date;
 
 import jp.co.use_eng.pokemap.Data.LocationData;
 import jp.co.use_eng.pokemap.Data.LocationDataList;
-//import jp.co.useeng.uselib.parse.plist.domain.String;
 import jp.co.useeng.uselib.util.UtilBitmap;
 import jp.co.useeng.uselib.util.UtilDate;
 

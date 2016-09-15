@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 
 import jp.co.useeng.uselib.base.App;
-//import jp.co.useeng.uselib.parse.plist.domain.String;
 import jp.co.useeng.uselib.util.UtilBitmap;
 import jp.co.useeng.uselib.util.UtilDate;
 import jp.co.useeng.uselib.util.UtilNet;
@@ -98,9 +97,8 @@ public class Server {
 
     }
 
-    static final String URL_DOMAIN     = "http://smart-app.use-eng.co.jp";
+    static final String URL_DOMAIN     = "http://smart-app.use-eng.co.jp/poke/html/index.php";
     private static final String DEBUG_SESSION  = "?XDEBUG_SESSION_START=netbeans-xdebug";
-    private static final String METHOD_AUTHORIZATION_ISSUE          = "authorization/issue";
 
     private static final String METHOD_GET_LOCATION      = "Poke_Location/getLocation";          //位置情報取得
     private static final String METHOD_LOCATION_INSERT   = "Poke_Location/location_insert";      //位置情報の登録
@@ -216,82 +214,36 @@ public class Server {
             final ServerParameter parameter = mParameter;
 
             // サーバアクセス
-            mRequestQueue.add(
-                    new JsonObjectRequest(Request.Method.POST, makeUrl(method), (JSONObject) parameter,
-                            new Response.Listener<JSONObject>() {
-                                @Override
-                                public void onResponse(JSONObject jsonObject) {
-                                    //通信成功
-                                    try {
-                                        ServerResponce.BaseResponce responce = new ServerResponce.BaseResponce(jsonObject);
-                                        if(responce.isReturnOK()) {
-                                            // 成功時、成功処理へ
-                                            listener.onResponse(responce.data);
-                                        } else if (responce.data.isAccessToken()) {
-                                            // トークン切れ時、再実行
-                                            post(method, parameter, onFin, listener, errorListener);
-                                        } else if(responce.isReturnNOTFOUND()) {
-                                            // NOTFOUND時、一旦成功処理とし、呼び出し先で処理をする
-                                            listener.onResponse(responce.data);
-                                        }  else {
-                                            // エラー時
-                                            onFin.onError(responce.message);
-                                        }
-                                    } catch (Exception e) {
-                                        onFin.onError(MESSAGE_ERROR_LOCAL);
-                                    }
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, makeUrl(method), (JSONObject) parameter,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject jsonObject) {
+                            //通信成功
+                            try {
+                                ServerResponce.BaseResponce responce = new ServerResponce.BaseResponce(jsonObject);
+                                if(responce.isReturnOK()) {
+                                    // 成功時、成功処理へ
+                                    listener.onResponse(responce.data);
+                                } else if (responce.data.isAccessToken()) {
+                                    // トークン切れ時、再実行
+                                    post(method, parameter, onFin, listener, errorListener);
+                                } else if(responce.isReturnNOTFOUND()) {
+                                    // NOTFOUND時、一旦成功処理とし、呼び出し先で処理をする
+                                    listener.onResponse(responce.data);
+                                }  else {
+                                    // エラー時
+                                    onFin.onError(responce.message);
                                 }
+                            } catch (Exception e) {
+                                onFin.onError(MESSAGE_ERROR_LOCAL);
                             }
-                            , errorListener)
-            );
+                        }
+                    }
+                    , errorListener);
 
-//            // トークン取得
-//            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, makeUrl(METHOD_AUTHORIZATION_ISSUE), null,
-//                    new Response.Listener<JSONObject>() {
-//                        @Override
-//                        public void onResponse(JSONObject jsonObject) {
-//                            try {
-//                                // サーバアクセス
-//                                mRequestQueue.add(
-//                                        new JsonObjectRequest(Request.Method.POST, makeUrl(method), (JSONObject) parameter,
-//                                                new Response.Listener<JSONObject>() {
-//                                                    @Override
-//                                                    public void onResponse(JSONObject jsonObject) {
-//                                                        //通信成功
-//                                                        try {
-//                                                            ServerResponce.BaseResponce responce = new ServerResponce.BaseResponce(jsonObject);
-//                                                            if(responce.isReturnOK()) {
-//                                                                // 成功時、成功処理へ
-//                                                                listener.onResponse(responce.data);
-//                                                            } else if (responce.data.isAccessToken()) {
-//                                                                // トークン切れ時、再実行
-//                                                                post(method, parameter, onFin, listener, errorListener);
-//                                                            } else if(responce.isReturnNOTFOUND()) {
-//                                                                // NOTFOUND時、一旦成功処理とし、呼び出し先で処理をする
-//                                                                listener.onResponse(responce.data);
-//                                                            }  else {
-//                                                                // エラー時
-//                                                                onFin.onError(responce.message);
-//                                                            }
-//                                                        } catch (Exception e) {
-//                                                            onFin.onError(MESSAGE_ERROR_LOCAL);
-//                                                        }
-//                                                    }
-//                                                }
-//                                                , errorListener)
-//                                );
-//
-//
-//                            } catch(Exception e) {
-//                                onFin.onError(MESSAGE_ERROR_LOCAL);
-//                            }
-//                        }
-//                    }, errorListener);
-
-//            DefaultRetryPolicy policy = new DefaultRetryPolicy(30000, 1, 1);
-//            request.setRetryPolicy(policy);
-//            mRequestQueue.add(request);
-
+            DefaultRetryPolicy policy = new DefaultRetryPolicy(30000, 1, 1);
+            request.setRetryPolicy(policy);
+            mRequestQueue.add(request);
 
         } catch(Exception e) {
             onFin.onError(MESSAGE_ERROR_LOCAL);
