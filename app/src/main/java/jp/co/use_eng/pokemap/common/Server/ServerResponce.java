@@ -187,12 +187,12 @@ public class ServerResponce {
     /**
      * 位置情報取得
      */
-    public static class getLocation extends BaseResponce {
+    public static class getResponceLocation extends BaseResponce {
 
         public LocationDataList locationList;
         public String lastUpdateDate;
 
-        public getLocation(JSONObject json) {
+        public getResponceLocation(JSONObject json) {
             super(json);
             try {
                 if (isReturnOK()) {

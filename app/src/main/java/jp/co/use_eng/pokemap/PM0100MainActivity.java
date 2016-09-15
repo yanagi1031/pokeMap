@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -55,30 +56,33 @@ public class PM0100MainActivity extends BaseActivity implements OnMapReadyCallba
         super.onCreate(savedInstanceState);
 
         // 広告表示
-        AdMobBannerView adMobBannerView = (AdMobBannerView)findViewById(R.id.adView);
-        adMobBannerView.startAd(Consts.AD_ID_BANNER);
+        startAdBannerView(R.id.adView,Consts.AD_ID_BANNER);
 
         // GoogleMapの使用
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        // 位置情報の取得
+        getLocation();
+
     }
 
+    private void getLocation() {
 
-
-    private void getPersonalData() {
-        progressStart("利用者情報取得中", "");
+        progressStart("位置情報取得中", "");
 
         try {
-            new Server().getLocation(
+            new Server().getServerLocation(
                     "",
                     new Server.OnFinishListener() {
                         @Override
-                        public <T extends ServerResponce.BaseResponce> void onFinish(T responce) {
+                        public <T extends ServerResponce.BaseResponce> void onFinish(@Nullable T responce) {
                             try {
-                                ServerResponce.getLocation locationList = (ServerResponce.getLocation)responce;
+                                ServerResponce.getResponceLocation locationList = (ServerResponce.getResponceLocation)responce;
 
                                 //ここに取得後の処理を書く
+                                //Toast.makeText(this, "抽出件数：" + locationList.lastUpdateDate, Toast.LENGTH_LONG).show();
+                                //Toast.makeText(this, "中心位置\n緯度:" + cameraPos.target.latitude + "\n経度:" + cameraPos.target.longitude, Toast.LENGTH_LONG).show();
 
 
 
@@ -98,8 +102,8 @@ public class PM0100MainActivity extends BaseActivity implements OnMapReadyCallba
                                 progressEnd();
                             }
                         }
-                    }
-            );
+                    });
+
         } catch (Exception e) {
             progressEnd();
         }

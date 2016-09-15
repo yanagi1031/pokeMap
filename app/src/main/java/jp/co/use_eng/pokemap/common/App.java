@@ -10,6 +10,8 @@ import java.lang.String; import java.util.Date;
 
 import jp.co.use_eng.pokemap.Data.PokemonData;
 import jp.co.use_eng.pokemap.Data.PokemonDataList;
+import jp.co.use_eng.pokemap.common.Server.Server;
+import jp.co.use_eng.pokemap.common.Server.ServerResponce;
 import jp.co.useeng.uselib.data.SerializeDataManager;
 import jp.co.useeng.uselib.util.UtilDate;
 import jp.co.useeng.uselib.util.UtilFile;
@@ -55,8 +57,6 @@ public class App extends jp.co.useeng.uselib.base.App {
 
 
     }
-
-
 
 
 
