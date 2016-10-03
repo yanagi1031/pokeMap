@@ -24,7 +24,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:onClick="onGetCenter"
-        android:textColor="@android:color/white"
+        android:textColor="@color/btn_text_color"
         android:background="#00000000" />
 
     <Button
@@ -35,19 +35,8 @@
         android:layout_above="@+id/include"
         android:layout_alignParentEnd="true"
         android:background="#00000000"
-        android:onClick="onClickRegist" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="フシギダネ"
-        android:id="@+id/txtFilter"
-        android:layout_above="@+id/include"
-        android:layout_centerHorizontal="true"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:textColor="@android:color/white" />
+        android:onClick="onClickRegist"
+        android:textColor="@color/btn_text_color" />
 
     <ImageView
         android:layout_width="40dp"
@@ -55,12 +44,24 @@
         android:id="@+id/imageView"
         android:background="@drawable/tgt"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/imgTargetDescription" />
 
     <!-- バナー広告 -->
     <jp.co.useeng.uselib.component.AdMobBannerView
         android:id="@+id/adView"
         style="@style/AdMobBannerViewStyle"
         android:layout_alignParentBottom="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/txtFilter"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@android:color/white"
+        android:layout_above="@+id/include"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

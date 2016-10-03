@@ -16,4 +16,5 @@
     <string name="btnToukou">投稿</string>
     <string name="btnBack">キャンセル</string>
     <string name="lblRegist">投稿情報</string>
+    <string name="imgTargetDescription">マップの中心地</string>
 </resources>
