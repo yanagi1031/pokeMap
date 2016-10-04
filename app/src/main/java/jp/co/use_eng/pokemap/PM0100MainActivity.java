@@ -150,10 +150,10 @@ public class PM0100MainActivity extends BaseActivity implements OnMapReadyCallba
 
         if (myLocate != null) {
             // カメラの移動
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom( new LatLng(myLocate.getLatitude(), myLocate.getLongitude()), 12));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom( new LatLng(myLocate.getLatitude(), myLocate.getLongitude()), 18));
         } else {
             // カメラの移動
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom( new LatLng(35.68, 139.76), 12));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom( new LatLng(35.68, 139.76), 18));
         }
 
         // ピンがタップされた時に表示するバルーンのカスタマイズ
